@@ -9,11 +9,19 @@ const DecisionWidget: React.FC<DecisionWidgetProps> = ({ decision }) => {
   return (
     <div style={{ border: '1px solid #ccc', padding: '10px', margin: '10px' }}>
       <p>{decision.text}</p>
-      {decision.actions.map((action, index) => (
-        <button key={index} onClick={action.onClick}>
-          {action.label}
-        </button>
-      ))}
+      {decision.status === 'done' ? (
+        <span style={{ color: 'green' }}>Done</span>
+      ) : decision.status === 'assigned' ? (
+        <span style={{ color: 'blue' }}>Assigned</span>
+      ) : (
+        <>
+          {decision.actions.map((action, index) => (
+            <button key={index} onClick={action.onClick}>
+              {action.label}
+            </button>
+          ))}
+        </>
+      )}
     </div>
   );
 };

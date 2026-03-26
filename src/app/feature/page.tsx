@@ -26,6 +26,7 @@ const SlackThreadPage = () => {
       .map((message) => ({
         id: message.ts,
         text: message.text,
+        status: 'pending', // New field to track action status
         actions: [
           { label: 'Mark as Done', onClick: () => handleAction(message, 'done') },
           { label: 'Assign', onClick: () => handleAction(message, 'assign') },
@@ -35,7 +36,10 @@ const SlackThreadPage = () => {
 
   const handleAction = (message: any, action: string) => {
     // Implement logic to perform the action on the Slack thread
-    console.log(`Handling ${action} for message:`, message);
+    const updatedDecisions = decisions.map((decision) =>
+      decision.id === message.ts ? { ...decision, status: action } : decision
+    );
+    setDecisions(updatedDecisions);
   };
 
   return (
