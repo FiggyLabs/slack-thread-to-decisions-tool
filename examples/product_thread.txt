@@ -1,0 +1,7 @@
+Sarah: Quick check — are we shipping the onboarding redesign this sprint or next?
+James: I think we should delay it. The new copy isn't ready.
+Sarah: Fair, but the dev work is done. Can we ship with placeholder copy?
+James: No, the copy is part of the UX. Let's move it to next sprint.
+Maria: Agree with James. Let's also add a task to get copy reviewed by Wed.
+Sarah: Ok. Onboarding redesign moves to next sprint. @Maria owns getting copy finalized by Wednesday.
+Maria: Confirmed.

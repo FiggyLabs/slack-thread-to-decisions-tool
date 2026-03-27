@@ -1,0 +1,33 @@
+# Secrets
+.env
+.env.*
+.env.local
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Node (if added later)
+node_modules/
+.next/
+dist/
+build/
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Output files (not source)
+output/
+*.decision.json
+*.decision.md

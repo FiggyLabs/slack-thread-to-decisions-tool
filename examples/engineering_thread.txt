@@ -1,0 +1,10 @@
+Alice: Should we use Postgres or MySQL for the new service?
+Bob: I've used both. Postgres has better JSON support and we'll need that for metadata.
+Alice: That's a good point. Anyone disagree?
+Charlie: No objections. Let's go with Postgres.
+Alice: Agreed. @Charlie can you update the infra docs and add it to the ADR?
+Charlie: On it. Will be done by Friday.
+Alice: Great. Also, should we use connection pooling from day one?
+Bob: Yes, add PgBouncer. We'll regret it if we don't.
+Alice: Ok, that's decided too. @Bob own that config.
+Bob: Got it.

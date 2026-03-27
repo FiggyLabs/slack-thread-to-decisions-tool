@@ -1,0 +1,8 @@
+# decide.py uses Python stdlib only for local Ollama.
+# Install these only if you want cloud fallbacks.
+
+# Uncomment for OpenAI:
+# openai>=1.0
+
+# Uncomment for Anthropic:
+# anthropic>=0.20
