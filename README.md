@@ -1,4 +1,4 @@
-*Part of [Figgy Labs](https://github.com/FiggyDev/figgy-labs)*
+*Part of [Figgy Labs](https://github.com/FiggyLabs/figgy-labs)*
 
 # ✅ Settled
 
