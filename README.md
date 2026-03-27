@@ -30,52 +30,119 @@ No Slack API. No login. No data leaving your machine.
 
 ## Demo
 
-Save this thread to a file and run one command:
+### The problem
+
+This is a real-looking Slack thread. A decision got made somewhere in the middle. Can you find it? Can you find who owns what?
+
+**thread.txt**
+
+```
+Maya:    so are we going with Stripe or Paddle for billing? we need to decide this week
+Tom:     I looked at both — Paddle handles VAT automatically which is huge for EU customers
+Maya:    yeah but Stripe has way better docs and we already have a test account
+Tom:     true, the VAT thing is a real headache though, we'd have to handle it ourselves with Stripe
+Priya:   can we just decide? we're burning time
+Tom:     fine, I'd go Stripe if someone owns the VAT compliance piece
+Maya:    @Priya can you look into what VAT compliance actually needs from us?
+Priya:   yeah I can do that, give me until Friday
+Maya:    ok Stripe it is. @Tom set up the live account and get us keys by EOD Thursday
+Tom:     on it
+Maya:    once we have keys @Priya can you add them to the secrets manager?
+Priya:   yep
+```
+
+### The command
 
 ```bash
 python settled.py --file thread.txt
 ```
 
-**thread.txt** — a real Slack thread:
-
-```
-Sarah:   ok we need to pick a deploy target before EOD — Railway or stay on Render?
-James:   render has been fine but we keep hitting the 512mb limit
-Marcus:  same, it crashed twice this sprint already
-Sarah:   Railway gives us more headroom and the pricing is similar once we upgrade
-James:   yeah i'm fine with Railway
-Marcus:  same
-Sarah:   ok Railway it is. @James can you migrate staging this week?
-James:   yep, done by Thursday
-Sarah:   great. prod migration follows after staging looks stable for a few days
-Marcus:  should we document this somewhere?
-Sarah:   yeah @Marcus add it to the decisions log in Notion
-Marcus:  on it
-```
-
-**Output:**
+### The output
 
 ```
 # Decision Record
 
-Thread summary: The team agreed to migrate from Render to Railway.
+Thread summary: The team chose Stripe over Paddle for billing, with action
+items to handle EU VAT compliance.
 
 ## Decision 1
-**Migrate from Render to Railway as the deploy target**
+**Use Stripe as the billing provider**
 
-- Owner:     James
-- Rationale: Render's 512MB memory limit has caused two crashes this sprint;
-             Railway provides more headroom at similar cost
+- Owner:      Maya
+- Rationale:  Better documentation, existing test account, and team familiarity
+              outweighed Paddle's automatic VAT handling
 - Confidence: 🟢 high
 - Action items:
-  - James: migrate staging environment by Thursday
-  - Prod migration follows after staging is confirmed stable
-  - Marcus: document decision in the Notion decisions log
+  - Tom:   set up live Stripe account and deliver API keys by Thursday EOD
+  - Priya: research VAT compliance requirements by Friday
+  - Priya: add Stripe keys to secrets manager once received
+
+## Open questions
+  - VAT compliance scope is unresolved — Priya's Friday research will determine
+    whether additional tooling is needed
 ```
 
-12 messages. 3 people. 2 action items with owners. Done in under 5 seconds.
+### Why it matters
 
-Prefer the web UI? `python settled.py --web` — paste and press Cmd+Enter.
+12 messages → 1 decision, 3 action items, 2 owners, 1 open question. Logged in under 5 seconds. No one has to reread the thread on Monday.
+
+---
+
+## Try it now
+
+Copy this, save it as `thread.txt`, and run:
+
+```bash
+git clone https://github.com/FiggyDev/slack-thread-to-decisions-tool
+cd slack-thread-to-decisions-tool
+python settled.py --file thread.txt
+```
+
+That's the whole setup.
+
+---
+
+## CLI demos
+
+```bash
+# Standard output
+python settled.py --file thread.txt
+
+# JSON — pipe into other tools
+python settled.py --file thread.txt --json
+
+# Inline thread
+python settled.py "Alice: Let's use Postgres. Bob: Agreed. Alice: @Bob own the migration."
+
+# Web UI — paste and press Cmd+Enter
+python settled.py --web
+```
+
+**JSON output** (`--json` flag):
+
+```json
+{
+  "summary": "The team chose Stripe over Paddle for billing.",
+  "decisions": [
+    {
+      "title": "Use Stripe as the billing provider",
+      "owner": "Maya",
+      "rationale": "Better docs, existing test account, team familiarity",
+      "confidence": "high",
+      "action_items": [
+        "Tom: set up live account and deliver API keys by Thursday EOD",
+        "Priya: research VAT compliance requirements by Friday",
+        "Priya: add Stripe keys to secrets manager once received"
+      ],
+      "open_questions": [
+        "VAT compliance scope — to be resolved after Priya's Friday research"
+      ]
+    }
+  ]
+}
+```
+
+Prefer the web UI? `python settled.py --web` — opens at `http://localhost:5100`, paste and press **Cmd+Enter**.
 
 ---
 

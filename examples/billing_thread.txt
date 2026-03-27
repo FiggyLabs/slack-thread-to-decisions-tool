@@ -1,0 +1,12 @@
+Maya:    so are we going with Stripe or Paddle for billing? we need to decide this week
+Tom:     I looked at both — Paddle handles VAT automatically which is huge for EU customers
+Maya:    yeah but Stripe has way better docs and we already have a test account
+Tom:     true, the VAT thing is a real headache though, we'd have to handle it ourselves with Stripe
+Priya:   can we just decide? we're burning time
+Tom:     fine, I'd go Stripe if someone owns the VAT compliance piece
+Maya:    @Priya can you look into what VAT compliance actually needs from us?
+Priya:   yeah I can do that, give me until Friday
+Maya:    ok Stripe it is. @Tom set up the live account and get us keys by EOD Thursday
+Tom:     on it
+Maya:    once we have keys @Priya can you add them to the secrets manager?
+Priya:   yep
